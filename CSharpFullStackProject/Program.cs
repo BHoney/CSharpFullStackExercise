@@ -1,7 +1,8 @@
 using CSharpFullStackProject.Models;
 using CSharpFullStackProject.Routes;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using static CSharpFullStackProject.Models.RoomDB;
+using static CSharpFullStackProject.Models.RoomDb;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,10 @@ builder.Services.AddSwaggerGen(o =>
     });
 });
 
+//Set up in memory dbs.
+builder.Services.AddDbContext<MeetingDb>(options => options.UseInMemoryDatabase("meetings"));
+builder.Services.AddDbContext<RoomDb>(options => options.UseInMemoryDatabase("rooms"));
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -30,7 +35,7 @@ if (app.Environment.IsDevelopment())
 
 
 // Hello World Route
-app.MapGet("/", () => "Hello C# API");
+app.MapGet("/", () => "Hello C Sharp API");
 
 app.MapGroup("/public/rooms")
     .MapRoomRoutesApi()
