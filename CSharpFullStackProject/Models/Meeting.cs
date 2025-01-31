@@ -1,14 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CSharpFullStackProject.Models;
 
+[Table("Meetings")]
 public record Meeting
 {
     public int Id { get; set; }
-    public required string Name { get; set; }
+    [Required]
+    [Display(Name = "Meeting Name")]
+    [StringLength(250)]
+    public string Name { get; set; }
+    
+    [Display(Name="Meeting Description")]
+    [StringLength(500)]
     public string? Description { get; set; }
+    
+    [Required]
+    [Display(Name = "Meeting Start Time")]
     public DateTime StartTime { get; set; }
+    
+    [Required]
+    [Display(Name = "Meeting End Time")]
     public DateTime EndTime { get; set; }
+
+    [Required] public Room Room { get; set; } = null!;
+    [Required]
+    public int RoomId { get; set; }
 }
 
 public class MeetingDb : DbContext
@@ -17,48 +37,3 @@ public class MeetingDb : DbContext
 
     public DbSet<Meeting> Meetings { get; set; } = null!;
 }
-
-// private static List<Meeting> _meetings =
-    // [
-    //     new Meeting
-    //     {
-    //         Id = 0, Name = "Meetings and You!", Description = "A meeting about meetings", StartTime = DateTime.Now,
-    //         EndTime = DateTime.Now.AddMinutes(30)
-    //     },
-    //
-    //     new Meeting
-    //     {
-    //         Id = 1, Name = "Standup - Engineering", Description = "Engineering team standup", StartTime = DateTime.Now,
-    //         EndTime = DateTime.Now.AddMinutes(30)
-    //     },
-    //
-    //     new Meeting
-    //     {
-    //         Id = 2, Name = "All Hands", Description = "We're all having a meeting now", StartTime = DateTime.Now,
-    //         EndTime = DateTime.Now.AddMinutes(30)
-    //     }
-    //
-    // ];
-    //
-    // public static List<Meeting> GetMeetings() => _meetings;
-    // public static Meeting GetMeetingById(int id) => _meetings.FirstOrDefault(m => m.Id == id);
-    // public static void AddMeeting(Meeting meeting) => _meetings.Add(meeting);
-    //
-    // public static Meeting UpdateMeeting(Meeting update)
-    // {
-    //     _meetings = _meetings.Select(meeting =>
-    //     {
-    //         if (meeting.Id == update.Id)
-    //         {
-    //             meeting.Name = update.Name;
-    //             meeting.Description = update.Description;
-    //             meeting.StartTime = update.StartTime;
-    //             meeting.EndTime = update.EndTime;
-    //         }
-    //         return meeting;
-    //     }).ToList();
-    //     return update;
-    // }
-    //
-    // public static void DeleteMeeting(int id) => _meetings = _meetings.Where(room => room.Id != id).ToList();
-// }

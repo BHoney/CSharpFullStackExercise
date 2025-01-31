@@ -8,7 +8,7 @@ public record Room
     [Key]
     public int Id { get; set; }
     public required string Name { get; set; }
-    public List<Meeting> Meetings { get; set; } = [];
+    public ICollection<Meeting> Meetings { get; set; } = new List<Meeting>();
 }
 
 public class RoomDb: DbContext
