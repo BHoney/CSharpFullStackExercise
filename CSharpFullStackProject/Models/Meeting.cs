@@ -26,9 +26,10 @@ public record Meeting
     [Display(Name = "Meeting End Time")]
     public DateTime EndTime { get; set; }
 
-    [Required] public Room Room { get; set; } = null!;
-    [Required]
-    public int RoomId { get; set; }
+    // TODO: We need to set up Many-to-One for this
+    // [Required] public Room Room { get; set; } = null!;
+    // [Required]
+    // public int RoomId { get; set; }
 }
 
 public class MeetingDb : DbContext
