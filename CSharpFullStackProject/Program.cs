@@ -1,10 +1,13 @@
 using CSharpFullStackProject.Models;
 using CSharpFullStackProject.Routes;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using static CSharpFullStackProject.Models.RoomDb;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//get connection strings
+var connectionString = builder.Configuration.GetConnectionString("MeetingDB") ?? "Data Source=Meeting.db";
+// builder.Services.AddSqlite<MeetingDb>(connectionString);
+builder.Services.AddSqlite<RoomDb>(connectionString);
 
 //build swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -17,10 +20,6 @@ builder.Services.AddSwaggerGen(o =>
         Description = "An API used to find available meeting rooms and set appointments.",
     });
 });
-
-//Set up in memory dbs.
-builder.Services.AddDbContext<MeetingDb>(options => options.UseInMemoryDatabase("meetings"));
-builder.Services.AddDbContext<RoomDb>(options => options.UseInMemoryDatabase("rooms"));
 
 var app = builder.Build();
 
