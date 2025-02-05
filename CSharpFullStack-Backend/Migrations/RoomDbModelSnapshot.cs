@@ -3,7 +3,6 @@ using System;
 using CSharpFullStackProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,16 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpFullStackProject.Migrations
 {
     [DbContext(typeof(RoomDb))]
-    [Migration("20250205162703_CommitedMigration")]
-    partial class CommitedMigration
+    partial class RoomDbModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
 
-            modelBuilder.Entity("CSharpFullStackProject.Models.Meeting", b =>
+            modelBuilder.Entity("CSharpFullStack-Backend.Models.Meeting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +48,7 @@ namespace CSharpFullStackProject.Migrations
                     b.ToTable("Meetings");
                 });
 
-            modelBuilder.Entity("CSharpFullStackProject.Models.Room", b =>
+            modelBuilder.Entity("CSharpFullStack-Backend.Models.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,9 +64,9 @@ namespace CSharpFullStackProject.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("CSharpFullStackProject.Models.Meeting", b =>
+            modelBuilder.Entity("CSharpFullStack-Backend.Models.Meeting", b =>
                 {
-                    b.HasOne("CSharpFullStackProject.Models.Room", "Room")
+                    b.HasOne("CSharpFullStack-Backend.Models.Room", "Room")
                         .WithMany("Meetings")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -78,7 +75,7 @@ namespace CSharpFullStackProject.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("CSharpFullStackProject.Models.Room", b =>
+            modelBuilder.Entity("CSharpFullStack-Backend.Models.Room", b =>
                 {
                     b.Navigation("Meetings");
                 });

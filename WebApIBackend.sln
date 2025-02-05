@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpFullStackProject", "CSharpFullStackProject\CSharpFullStackProject.csproj", "{F1107DA0-3C44-4A22-8181-105BE583F44D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpFullStack-Backend", "CSharpFullStack-Backend\CSharpFullStack-Backend.csproj", "{F1107DA0-3C44-4A22-8181-105BE583F44D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
