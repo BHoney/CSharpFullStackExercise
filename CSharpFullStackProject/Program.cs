@@ -13,6 +13,7 @@ builder.Services.AddSqlite<RoomDb>(connectionString);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
 {
+    o.SupportNonNullableReferenceTypes();
     o.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",

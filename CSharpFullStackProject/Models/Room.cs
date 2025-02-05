@@ -14,6 +14,8 @@ public class Room(int id, string name)
     public string Name { get; set; } = name;
 
     public ICollection<Meeting> Meetings { get; set; } = new List<Meeting>();
+
+    public override string ToString() => $"ID: {Id}, Room {Name}. This room has {Meetings.Count} meetings.";
 }
 
 [Table("Meetings")]
