@@ -21,8 +21,20 @@ builder.Services.AddSwaggerGen(o =>
         Description = "An API used to find available meeting rooms and set appointments.",
     });
 });
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy(name: "CorsPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,13 +1,10 @@
 import './App.css'
+import MeetingsMainScreenComponent from "./components/MeetingsMainScreenComponent.tsx";
 
 function App() {
-  return (
-      <>
-          <div>
-          <h1 className="text-3xl font-bold underline text-center text-red-500">Hello world!</h1>
-          </div>
-      </>
-  )
+    return (
+        <MeetingsMainScreenComponent/>
+    )
 }
 
 export default App

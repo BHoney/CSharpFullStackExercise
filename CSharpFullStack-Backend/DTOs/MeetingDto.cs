@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace CSharpFullStackProject.DTOs;
 
-public class MeetingDto(int id, string name, string description, DateTime startDate, DateTime endDate, int roomId)
+public class MeetingDto(int id, string name, string description, DateTime startTime, DateTime endTime, int roomId) : DTO
 {
     public int Id { get; set; } = id;
     [Required]
@@ -12,9 +13,9 @@ public class MeetingDto(int id, string name, string description, DateTime startD
     [StringLength(250)]
     public string? Description { get; set; } = description;
     [Required]
-    public DateTime StartTime { get; set; } = startDate;
+    public DateTime StartTime { get; set; } = startTime;
     [Required]
-    public DateTime EndTime { get; set; } = endDate;
+    public DateTime EndTime { get; set; } = endTime;
     [Required]
     public int RoomId { get; set; } = roomId;
 }

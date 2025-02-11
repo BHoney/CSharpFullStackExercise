@@ -27,9 +27,8 @@ public static class MeetingsRoute
 
         group.MapGet("/{id}", async (RoomDb db, int id) => await db.Meetings.FirstOrDefaultAsync(m => m.Id == id));
 
-        group.MapPost("/", async (RoomDb db, [FromForm] MeetingDto meetingDto) =>
+        group.MapPost("/", async (RoomDb db, MeetingDto meetingDto) =>
         {
-            // var room = await db.Rooms.FindAsync(meetingDto.RoomId);
             var room = await db.Rooms
                 .Include(r => r.Meetings)
                 .FirstOrDefaultAsync(r => r.Id == meetingDto.RoomId);
