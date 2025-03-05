@@ -31,7 +31,7 @@ const MeetingCard: FC<MeetingCardProps> = ({
           <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden relative">
             {/* Placeholder avatar - replace with actual user image */}
             <Image
-              src="/placeholder-avatar.png"
+              src={`https://avatar.iran.liara.run/public/?username=${meetingName}`}
               alt="User avatar"
               fill
               className="object-cover"
@@ -58,7 +58,7 @@ const MeetingCard: FC<MeetingCardProps> = ({
                 className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 relative"
               >
                 <Image
-                  src="/placeholder-avatar.png"
+                  src={`https://avatar.iran.liara.run/public/?username=${i}`}
                   alt={`Attendee ${i + 1}`}
                   fill
                   className="object-cover rounded-full"
