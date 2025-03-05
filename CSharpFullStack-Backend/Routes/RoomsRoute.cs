@@ -11,7 +11,7 @@ public static class RoomsRoute
     {
         group.MapGet(
             "/",
-            async (RoomService roomService) =>
+            async (IRoomService roomService) =>
             {
                 try
                 {
@@ -27,7 +27,7 @@ public static class RoomsRoute
 
         group.MapGet(
             "/{id}",
-            async (RoomService roomService, int id) =>
+            async (IRoomService roomService, int id) =>
             {
                 try
                 {
@@ -47,7 +47,7 @@ public static class RoomsRoute
 
         group.MapPost(
             "/",
-            async (RoomService roomService, RoomDto roomDto) =>
+            async (IRoomService roomService, RoomDto roomDto) =>
             {
                 try
                 {
@@ -62,8 +62,8 @@ public static class RoomsRoute
         );
 
         group.MapPut(
-            "/",
-            async (RoomService roomService, Room update, int id) =>
+            "/{id}",
+            async (IRoomService roomService, int id, Room update) =>
             {
                 try
                 {
@@ -83,7 +83,7 @@ public static class RoomsRoute
 
         group.MapDelete(
             "/{id}",
-            async (RoomService roomService, int id) =>
+            async (IRoomService roomService, int id) =>
             {
                 try
                 {

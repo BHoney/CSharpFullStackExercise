@@ -1,42 +1,43 @@
 "use client";
 
+import axios from "axios";
 import Room, { Meeting } from "./components/Room";
-import { useEffect, useState } from "react";
+import ThemeToggle from './components/ThemeToggle';
+import { useEffect, useState, useCallback } from "react";
 
 interface Room {
   id: number;
   name: string;
-  meetings: Meeting[];
 }
 
 export default function Home() {
   const [rooms, setRooms] = useState<Room[]>([]);
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await fetch('http://localhost:5114/api/rooms');
-        if (!response.ok) {
-          throw new Error('Failed to fetch rooms');
-        }
-        const data = await response.json();
-        setRooms(data);
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-      }
-    };
-
-    fetchRooms();
-    console.log(rooms.length);
+  const fetchRooms = useCallback(async () => {
+    try {
+      const response = await axios.get<Room[]>('http://localhost:5114/public/rooms');
+      console.log('API Response:', response.data);
+      setRooms(Array.isArray(response.data) ? response.data : []);
+    } catch (error) {
+      console.error('Error fetching rooms:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchRooms();
+  }, [fetchRooms]);
 
   return (
     <div>
-    {rooms.map(room => (
-    <Room
-      roomId={room.id}
-      roomName={room.name}
-    />
-    ))}</div>
+      <ThemeToggle />
+      {rooms.map(room => (
+        <Room
+          key={room.id}
+          roomId={room.id}
+          roomName={room.name}
+          onRefresh={fetchRooms}
+        />
+      ))}
+    </div> 
   );
 }

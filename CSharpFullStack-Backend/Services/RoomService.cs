@@ -4,7 +4,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSharpFullStackProject.Services;
 
-public class RoomService
+public interface IRoomService
+{
+    Task<List<RoomResponseDto>> GetAllRooms();
+    Task<RoomResponseDto> GetRoomById(int id);
+    Task<Room> CreateRoom(RoomDto roomDto);
+    Task UpdateRoom(int id, Room update);
+    Task DeleteRoom(int id);
+}
+
+
+public class RoomService : IRoomService
 {
     private readonly RoomDb _db;
 
@@ -21,6 +31,7 @@ public class RoomService
                 r.Id,
                 r.Name,
                 r.Meetings.Select(m => new MeetingResponseDto(
+                        m.Id,
                         m.Name,
                         m.Description,
                         m.StartTime,
@@ -43,6 +54,7 @@ public class RoomService
             room.Id,
             room.Name,
             room.Meetings.Select(m => new MeetingResponseDto(
+                    m.Id,
                     m.Name,
                     m.Description,
                     m.StartTime,
