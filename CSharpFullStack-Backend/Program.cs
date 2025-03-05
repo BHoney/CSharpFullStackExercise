@@ -1,5 +1,6 @@
 using CSharpFullStackProject.Models;
 using CSharpFullStackProject.Routes;
+using CSharpFullStackProject.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MeetingDB") ?? "Data Source=Meeting.db";
 // builder.Services.AddSqlite<MeetingDb>(connectionString);
 builder.Services.AddSqlite<RoomDb>(connectionString);
+builder.Services.AddScoped<RoomService>();
 
 //build swagger
 builder.Services.AddEndpointsApiExplorer();
